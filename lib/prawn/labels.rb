@@ -104,13 +104,13 @@ module Prawn
       if options[:vertical_text]
         @document.rotate(270, :origin => b.top_left) do
           @document.translate(0, b.width) do
-            @document.bounding_box b.top_left, :width => @height, :height => @width do
+            @document.bounding_box b.top_left, :width => self.height, :height => self.width do
               yield @document, record
             end
           end
         end
       else
-        @document.bounding_box b.top_left, :width => @width, :height => @height do
+        @document.bounding_box b.top_left, :width => self.width, :height => self.height do
           yield @document, record
         end
       end
