@@ -103,16 +103,19 @@ module Prawn
 
       b = @document.grid(p.first, p.last)
 
+      Rails.logger.info "setted width=" + @width.to_s + " height=" + @height.to_s
+      Rails.logger.info "calculated width=" + b.width.to_s + " height=" + b.height.to_s
+
       if options[:vertical_text]
         @document.rotate(270, :origin => b.top_left) do
           @document.translate(0, b.width) do
-            @document.bounding_box b.top_left, :width => @height, :height => @width do
+            @document.bounding_box b.top_left, :width => b.height, :height => b.width do
               yield @document, record
             end
           end
         end
       else
-        @document.bounding_box b.top_left, :width => @width, :height => @height do
+        @document.bounding_box b.top_left, :width => b.width, :height => b.height do
           yield @document, record
         end
       end
