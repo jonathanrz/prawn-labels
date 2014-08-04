@@ -20,8 +20,8 @@ module Prawn
       end
 
       def render(data, options = {}, &block)
-				self.width = options[:width]
-				self.height = options[:height]
+				@width = options[:width]
+				@height = options[:height]
         labels = Labels.new(data, options, &block)
         labels.document.render
       end
@@ -106,13 +106,13 @@ module Prawn
       if options[:vertical_text]
         @document.rotate(270, :origin => b.top_left) do
           @document.translate(0, b.width) do
-            @document.bounding_box b.top_left, :width => self.height, :height => self.width do
+            @document.bounding_box b.top_left, :width => @height, :height => @width do
               yield @document, record
             end
           end
         end
       else
-        @document.bounding_box b.top_left, :width => self.width, :height => self.height do
+        @document.bounding_box b.top_left, :width => @width, :height => @height do
           yield @document, record
         end
       end
