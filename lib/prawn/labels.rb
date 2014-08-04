@@ -20,6 +20,8 @@ module Prawn
       end
 
       def render(data, options = {}, &block)
+				self.width = options[:width]
+				self.height = options[:height]
         labels = Labels.new(data, options, &block)
         labels.document.render
       end
