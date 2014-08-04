@@ -10,7 +10,6 @@ require 'yaml'
 module Prawn
   class Labels
     attr_reader :document, :type
-    attr_accessor :width, :height
 
     class << self
 
@@ -20,8 +19,6 @@ module Prawn
       end
 
       def render(data, options = {}, &block)
-				@width = options[:width]
-				@height = options[:height]
         labels = Labels.new(data, options, &block)
         labels.document.render
       end
@@ -51,6 +48,9 @@ module Prawn
       type["paper_size"]  ||= "A4"
       type["top_margin"]  ||= 36
       type["left_margin"] ||= 36
+
+      @width = options[:width]
+      @height = options[:height]
       
       options[:document] ||= {}
       
