@@ -21,6 +21,8 @@ module Prawn
       def render(data, options = {}, &block)
         labels = Labels.new(data, options, &block)
         labels.document.render
+				@width = options[:width]
+        @height = options[:height]
       end
 
       def types=(custom_types)
@@ -59,9 +61,6 @@ module Prawn
                                 :bottom_margin  => type["bottom_margin"],
                                 :left_margin    => type["left_margin"],
                                 :right_margin   => type["right_margin"])
-
-      @width = type[:width]
-      @height = type[:height]
 
       generate_grid @type
 
