@@ -59,7 +59,10 @@ module Prawn
                                 :bottom_margin  => type["bottom_margin"],
                                 :left_margin    => type["left_margin"],
                                 :right_margin   => type["right_margin"])
-                                
+
+      @width = type[:width]
+      @height = type[:height]
+
       generate_grid @type
 
       data.each_with_index do |record, index|
@@ -99,6 +102,8 @@ module Prawn
       shrink_text(record) if options[:shrink_to_fit] == true
 
       b = @document.grid(p.first, p.last)
+      b.width = @width
+      b.height = @height
 
       if options[:vertical_text]
         @document.rotate(270, :origin => b.top_left) do
